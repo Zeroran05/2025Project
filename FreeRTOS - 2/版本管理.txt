@@ -1,0 +1,65 @@
+7.28-cjz
+1-调节回转电机PID参数，减少其超调
+2-调节直线电机计算目标值的参数，减少误差
+
+7.31-cjz
+1-调整舵机伸缩的参数，减少误差，优化抓取和放置动作
+
+8-6 wu
+1 《Engine.c》机械爪初始化函数void motor_reset(void)修改 94行
+	HAL_Delay(3000);//步进电机收缩时间长一点（防止顶不到顶部）
+1 《Engine.c》单纯上升、下降函数修改 106~128行
+void motor_up(void)
+{
+	//舵机 上升
+	TIM4->CCR1=INITIAL1; 
+	TIM4->CCR2=INITIAL1;
+	//步进电机  张开
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_SET); //向上
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);	//使能《》
+	HAL_Delay(1500);
+	HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_2);				//不能
+}
+void motor_down(void)
+{
+	//步进电机  收缩
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_RESET); //向上
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);	//使能
+	HAL_Delay(1500);
+	HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_2);				//不能
+	//舵机 下降
+	TIM4->CCR1=MOTOR_DOWN1; 
+	TIM4->CCR2=MOTOR_DOWN2;
+	HAL_Delay(800);
+}
+2 《Engine.h》 10~25
+舵机参数宏定义
+#define PUT_CUBE1 INITIAL1+150
+#define PUT_CUBE2 INITIAL2+150
+#define PUT_BALL1 INITIAL1+150
+#define PUT_BALL2 INITIAL2+150
+#define MOTOR_DOWN1 INITIAL1+450
+#define MOTOR_DOWN2 INITIAL2+450
+#define EDGE_BALL_STATE1_1 INITIAL1+300
+#define EDGE_BALL_STATE1_2 INITIAL2+300
+#define EDGE_BALL_STATE2_1 INITIAL1+400
+#define EDGE_BALL_STATE2_2 INITIAL2+400
+#define EDGE_CUBE_STATE2_1 INITIAL1+250
+#define EDGE_CUBE_STATE2_2 INITIAL2+250
+
+8-7 wu
+1 舵机参数：上升下降动作
+2 步进电机：抓取放置动作
+
+8-9 wu
+1 初始动作：上升+张开 下降+收缩  上升+张开(看看有没有坏)
+2 新增模式：下降+收缩抓取+不上来
+3 抓取动作：一开始张开(不再需要复位)
+
+8-11wu
+1 电机最大占空比为100%，速度更快
+2 舵机爪榨取停留时间更短，速度更快
+
+8-14 cjz
+代码规范性，主要是把所有的变量声明放在Variate.h文件，把变量定义放在Variate.c文件
+
