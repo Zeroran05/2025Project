@@ -10,7 +10,6 @@ int32_t encoder1 = 0;//回转电机编码器
 int32_t pid1_err_limit = 1000;//1200=1degree 控制误差判断，在误差范围内就不再进行控制，根据实际需要调整
 int16_t Motor1EncoderOverflowCnt = 0;//控制回转运动电机编码器溢出
 float RoundEncoder =0.0;
-int New_Message1=0;
 int Round_Finish=0;
 
 int32_t pwm2 = 0;

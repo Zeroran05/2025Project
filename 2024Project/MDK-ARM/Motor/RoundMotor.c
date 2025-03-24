@@ -31,13 +31,16 @@ void set_motor1_rotate(int32_t pwm)
 
 void StartTaskMotor1(void)
 {
-	if(Start_Flag==1&&Round_Finish==0)
+	if(Start_Flag==1)
 	{
-		New_Message1=1;
+		 if(Round_Finish==0) 
+		{
+			Round_Finish=11;
+		}
 	}
 	else if(Start_Flag==0) 
 	{
-		New_Message1=0;
+		Round_Finish=0;
 	}
 	
 	float transmit_angle=0.0;

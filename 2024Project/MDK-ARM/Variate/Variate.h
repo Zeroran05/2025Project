@@ -34,7 +34,6 @@ extern int32_t encoder2;
 
 
 extern int Start_Flag;
-extern int New_Message1;
 extern int Round_Finish;
 extern int Linear_Finish;
 
