@@ -19,7 +19,7 @@ int32_t read_encoder(TIM_HandleTypeDef *htim)
   */
 void set_target(PID *pid, int32_t temp_val)
 { 
-		pid -> target_val = temp_val;
+	pid -> target_val = temp_val;
 }
 /**
   * @brief  PWMÏÞ·ù

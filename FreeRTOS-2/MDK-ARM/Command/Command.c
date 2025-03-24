@@ -8,8 +8,7 @@ void Command_Analysis(void)
 {
 	int8_t i=0;
 	i=FindCommand(i);
-	if(i==-1)
-		return;
+	if(i==-1)  return;
 	Check_Sum=Command[i+4]+Command[i+5]+Command[i+6]+1;
 	if(Check_Sum==Command[i+7])
 	{
@@ -62,15 +61,21 @@ void Command_Analysis(void)
 int8_t FindCommand(int8_t i)
 {
 	while(Command[i]!=0x53 || Command[i+1]!=0x5A || Command[i+2]!=0x48 || Command[i+3]!=0x59)
-{
-	i++;
-	if(i>=93)
-		return -1;
-}
+	{
+		i++;
+		if(i>=93)  
+		{
+			return -1;
+		}
+	}
 	if((Command[i+4]>TRY_UNMOVE && Command[i+4]<=TRY_GRAB_CUBE_DOWN) || Command[i+4]==TRY_FORCE_RESET || Command[i+4]==TRY_FORCE_STOP || Command[i+4]==TRY_UNMOVE)
+	{	
 		return i;
-	else
+	}
+	else 
+	{
 		return -1;
+	}		
 }
 
 void Data_cal(void)

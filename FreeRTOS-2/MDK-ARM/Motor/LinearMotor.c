@@ -15,7 +15,7 @@ void StartTaskMotor2(void)
 		HAL_Delay(5);//每5ms更新一次
     }while(!Check_LinearMotor_Position());
 	
-		if(Start_Flag==1 && NewMessage2==false)
+	if(Start_Flag==1 && NewMessage2==false)
 	{
 		xSemaphoreGive(Linear_Finish);
 	}
@@ -64,7 +64,6 @@ void set_motor2_rotate(int32_t pwm)
 	}
 	else                                                  //刹车
 	{
-		
 		TIM3->CCR3 = 0;
 		TIM3->CCR4 = 0;
 	}
@@ -76,21 +75,21 @@ bool Check_LinearMotor_Position(void)
 	static int last=0;
 	bool judge=false;
 	if((pid2.err - last)<= 10 && (pid2.err - last)>= -10 && abs(pid2.err)<= pid2_err_limit)
-			{
-				cnt++;
-			}
-			else
-			{
-				cnt=0;
-			}
-			last = pid2.err;
-			if(cnt>=FINISH_CNT)
-			{
-				judge=true;
-				cnt=0;
-				last=0;
-			}
-			return judge;
+	{
+		cnt++;
+	}
+	else
+	{
+		cnt=0;
+	}
+	last = pid2.err;
+	if(cnt>=FINISH_CNT)
+	{
+		judge=true;
+		cnt=0;
+		last=0;
+	}
+	return judge;
 }
 
 void Transmit_Motor2_Position(void)

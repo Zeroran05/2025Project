@@ -269,7 +269,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			Motor1EncoderOverflowCnt++;//向上溢出
 		}
 	}
-  if(htim == &htim5)
+    if(htim == &htim5)
 	{
 		if(__HAL_TIM_IS_TIM_COUNTING_DOWN(&htim5))//同上
 		{
@@ -281,9 +281,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		}
 	}
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM14) {
-    HAL_IncTick();
-  }
+	if (htim->Instance == TIM14) 
+	{
+		HAL_IncTick();
+	}
   /* USER CODE BEGIN Callback 1 */
 
   /* USER CODE END Callback 1 */

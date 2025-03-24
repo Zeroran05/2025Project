@@ -204,7 +204,7 @@ void LinearMotorTask(void const * argument)
 		if(Mode_Command!=TRY_FORCE_RESET)  
 		{
 			StartTaskMotor2();
-    }
+		}
 		osDelay(1);
   }
   /* USER CODE END LinearMotorTask */
@@ -248,19 +248,18 @@ void Engine(void const * argument)
 			else if(Mode_Command==TRY_PUT_CUBE)  			motor_put_cube();
 			else if(Mode_Command==TRY_GRAB_BALL) 			motor_grab_ball();
 			else if(Mode_Command==TRY_PUT_BALL)  			motor_put_ball();
-			else if(Mode_Command==TRY_RESET) 		 			motor_reset();
+			else if(Mode_Command==TRY_RESET) 		 		motor_reset();
 			else if(Mode_Command==TRY_UP) 		   			motor_up_open();
-			else if(Mode_Command==TRY_DOWN) 		 			motor_down_close();
-			else if(Mode_Command==TRY_GRAB_EDGE_BALL) motor_grab_edge_ball();
-			else if(Mode_Command==TRY_GRAB_EDGE_CUBE) motor_grab_edge_cube();
-			else if(Mode_Command==TRY_UP_LITLLE)      motor_up_little();
-			else if(Mode_Command==TRY_GRAB_CUBE_DOWN) motor_grab_cube_down();
-			else if(Mode_Command==TRY_SWAP)						motor_swap();
+			else if(Mode_Command==TRY_DOWN) 		 		motor_down_close();
+			else if(Mode_Command==TRY_GRAB_EDGE_BALL)	 	motor_grab_edge_ball();
+			else if(Mode_Command==TRY_GRAB_EDGE_CUBE) 		motor_grab_edge_cube();
+			else if(Mode_Command==TRY_UP_LITLLE)      		motor_up_little();
+			else if(Mode_Command==TRY_GRAB_CUBE_DOWN) 		motor_grab_cube_down();
+			else if(Mode_Command==TRY_SWAP)					motor_swap();
 			transmit[4]=0xFF;			
 			Start_Flag=0;
 		}
-		
-    osDelay(1);
+		osDelay(1);
   }
   /* USER CODE END Engine */
 }
@@ -280,7 +279,7 @@ void Transmit(void const * argument)
   {
 		transmit[7]=transmit[4]+transmit[5]+transmit[6];
 		HAL_UART_Transmit_DMA(&huart2,(uint8_t *)transmit, 8);	
-    osDelay(1);
+        osDelay(1);
   }
   /* USER CODE END Transmit */
 }
